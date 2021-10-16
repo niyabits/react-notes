@@ -1,6 +1,7 @@
 {
   "index": "Introduction",
-  "get-started": "Get Started",
+  "raw-react-apis": "Raw React APIs",
+  "jsx": "jsx",
   "features": "Features",
   "themes": "Themes",
   "advanced": "Advanced"

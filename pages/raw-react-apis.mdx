@@ -1,0 +1,42 @@
+# Raw React APIs
+## `ReactDOM.Render`
+React is a multi-platform library like VR, Mobile, Desktop, Terminal etc. 
+For web, we need to render React to the [Document Object Model (DOM)](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model).
+
+ReactDOM internally uses JavaScript to create an element and append it to the DOM. You can [see it here](https://github.com/facebook/react/blob/b72dc8e9300f5ae997f7f5cfcd79b604cca3df0c/packages/react-dom/src/client/ReactDOMComponent.js#L418).
+
+## `React.createElement`
+The `React.createElemnt` function takes in two arguments, the element *type* and *props*.
+The element type can be the usual HTML element types like `div`, `h1`, `li`, etc.
+Props stand for properties, these are again the usual HTML attributes we pass in, like the `id`, `href` etc.
+
+Both the element types and props have a few notable exceptions that are provided by React for our convenience.
+Let's talk about one important *prop* type called `children`. `children` can take a single string like \"Hello World!\" or an array of chidren.
+
+Take a look at the code for better understanding:
+
+```javascript
+const elementProps = {id: 'element-id', children: 'Hello world!'}
+const elementType = 'h1'
+const reactElement = React.createElement(elementType, elementProps)
+ReactDOM.render(reactElement, rootElement)
+```
+
+Now if, the `reactElement` has a type of `div` or it is any other container element that can contain multiple elements, then we need a way to pass multiple elements.
+
+There are two ways to pass multiple elements — <br />
+1. `React.createElement('div', {children: [one, two, three]})`
+2. `React.createElement('div', null, one, two, three)`
+
+`one`, `two`, and `three` are children react elements. <br />
+In the second way, the 2nd argument has to be either null or it has to be an object which contains either the `id` or `class` of the element.
+ <br />
+In React, we don't use `class` because it is a JavaScript keyword, so we use `className` instead, an example of a React Element having a class is — <br />
+
+```js
+React.createElement('div', {className: "class-of-div"}, one, two, three).
+```
+
+\* `one`, `two`, and `three` are React elements and not usual DOM elements, so you need to create those elements using the `React.createElement` API, now that you know it, you can nest multiple different `React.createElement`s to form a DOM tree. The DOM tree formed with these nested function is called a Virtual DOM.
+
+As you can see already using `React.createElement` can be tedious, and we will not be actually using it, we will be using something called JSX which provides us syntactic sugar over `React.createElement`.
